@@ -32,6 +32,13 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/products/:name", async (req, res) => {
+      const name = req.params.name;
+      const query = { brandName: name };
+      const result = await productCollection.findOne(query);
+      res.send(result);
+    });
+
     app.post("/products", async (req, res) => {
       const newProduct = req.body;
       const result = await productCollection.insertOne(newProduct);
